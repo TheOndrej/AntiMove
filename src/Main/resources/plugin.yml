@@ -1,0 +1,5 @@
+name: AntiMove
+author: Ondrej
+version: 1.0
+main: me.Ondrej.AntiMove.Main
+description: AntiMove plugin
