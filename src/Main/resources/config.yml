@@ -1,2 +1,6 @@
-message: '&7[&6&lSystem&7] You are joining? Wait three seconds, please.'
+joinmessage: '&7[&6&lSystem&7] You are joining? Wait three seconds, please.'
+freezemessage: '&7[&6&lSystem&7] You were freeze.'
+unfreezemessage: '&7[&6&lSystem&7] You were unfreeze.'
+freezemessageadmin: '&7[&6&lSystem&7] You are freezing player: <player>.'
+unfreezemessageadmin: '&7[&6&lSystem&7] You are unfreezing player: <player>.'
 time: 3
