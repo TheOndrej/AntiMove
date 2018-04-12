@@ -2,4 +2,9 @@ name: AntiMove
 author: Ondrej
 version: 1.0
 main: me.Ondrej.AntiMove.Main
-description: AntiMove plugin
+description: Antimove plugin
+commands:
+ freeze:
+  description: Freeze command
+ unfreeze:
+  description: Unfreeze command
