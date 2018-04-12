@@ -1,5 +1,6 @@
 package me.Ondrej.AntiMove.Listeners;
 
+import javafx.print.PageLayout;
 import me.Ondrej.AntiMove.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class Join implements Listener{
 
 
-    ArrayList<Player> player = new ArrayList<>();
+    public static ArrayList<Player> player = new ArrayList<>();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -26,24 +27,36 @@ public class Join implements Listener{
         File f = new File(Bukkit.getServer().getPluginManager().getPlugin("AntiMove").getDataFolder(), File.separator + "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(f);
 
-        player.add(p);
-
         if (!f.exists()) {
             try {
 
-                config.createSection("message");
-                config.set("message", "&7[&6&lSystem&7] You are joining? Wait three seconds, please.");
+                config.createSection("joinmessage");
+                config.set("joinmessage", "&7[&6&lSystem&7] You are joining? Wait three seconds, please.");
+
+                config.createSection("freezemessage");
+                config.set("freezemessage", "&7[&6&lSystem&7] You were freeze.");
+
+                config.createSection("unfreezemessage");
+                config.set("unfreezemessage", "&7[&6&lSystem&7] You were unfreeze.");
+
+                config.createSection("freezemessageadmin");
+                config.set("freezemessageadmin", "&7[&6&lSystem&7] You are freezing player: player.");
+
+                config.createSection("unfreezemessageadmin");
+                config.set("unfreezemessageadmin", "&7[&6&lSystem&7] You are unfreezing player: player.");
 
                 config.createSection("time");
                 config.set("time", 3);
 
                 int tim = config.getInt("time");
 
-                String mess = config.getString("message");
+                String mess = config.getString("joinmessage");
 
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', mess));
 
                 int vypocet = tim * 20;
+
+                player.add(p);
 
                 Main.pl.getServer().getScheduler().runTaskLater(Main.pl, () -> player.remove(p), vypocet);
 
@@ -53,30 +66,25 @@ public class Join implements Listener{
                 exception.printStackTrace();
             }
         } else {
-            int tim = config.getInt("time");
 
-            String mess = config.getString("message");
+                int tim = config.getInt("time");
+
+                String mess = config.getString("joinmessage");
 
 
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', mess));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', mess));
 
-            int vypocet = tim * 20;
+                int vypocet = tim * 20;
 
-            Main.pl.getServer().getScheduler().runTaskLater(Main.pl, () -> player.remove(p), vypocet);
+                player.add(p);
+
+                Main.pl.getServer().getScheduler().runTaskLater(Main.pl, () -> player.remove(p), vypocet);
+
         }
     }
 
     @EventHandler
     public void onMove(PlayerMoveEvent e){
-        Player p = e.getPlayer();
-
-        if (this.player.contains(p)){
-            e.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onChat(PlayerChatEvent e){
         Player p = e.getPlayer();
 
         if (this.player.contains(p)){
