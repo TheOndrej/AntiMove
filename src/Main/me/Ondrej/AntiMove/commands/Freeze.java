@@ -24,15 +24,22 @@ public class Freeze implements CommandExecutor {
                 File f = new File(Bukkit.getServer().getPluginManager().getPlugin("AntiMove").getDataFolder(), File.separator + "config.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(f);
 
+                if (p.hasPermission("antimove.freeze")){
+
                 if (args.length != 0) {
                     Player check = Main.pl.getServer().getPlayer(args[0]);
 
                     if (check == null) {
-                        p.sendMessage("§7[§6§lAntimove§7] §cThis player is not online.");
+
+                        String a = config.getString("playernotonline").replaceAll("<player>", args[0]);
+
+                        config.set("playernotonline", a);
+
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("playernotonline")));
                         return true;
                     }
 
-                    if (Join.player.contains(check)){
+                    if (Join.player.contains(check)) {
 
                         String a = config.getString("freezemessageadmin").replaceAll("<player>", check.getName());
 
@@ -52,9 +59,12 @@ public class Freeze implements CommandExecutor {
                         check.sendMessage(mess);
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("freezemessageadmin")));
                     }
+                } else {
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("noplayer")));
+                }
 
                 } else {
-                    p.sendMessage("§7[§6§lAntimove§7] §cYou must give player name");
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("dontpermission")));
                 }
             } else {
                 if (args.length != 0) {

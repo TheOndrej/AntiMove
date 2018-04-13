@@ -24,27 +24,36 @@ public class Unfreeze implements CommandExecutor{
                 File f = new File(Bukkit.getServer().getPluginManager().getPlugin("AntiMove").getDataFolder(), File.separator + "config.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(f);
 
-                if (args.length != 0) {
-                    Player check = Main.pl.getServer().getPlayer(args[0]);
+                if (p.hasPermission("antimove.unfreeze")) {
 
-                    if (check == null) {
-                        p.sendMessage("§7[§6§lAntimove§7] §cThis player is not online.");
-                        return true;
+                    if (args.length != 0) {
+                        Player check = Main.pl.getServer().getPlayer(args[0]);
+
+                        if (check == null) {
+
+                                String a = config.getString("playernotonline").replaceAll("<player>", args[0]);
+
+                                config.set("playernotonline", a);
+
+                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("playernotonline")));
+                                return true;
+                        }
+
+                            Join.player.remove(check);
+
+                            String a = config.getString("unfreezemessageadmin").replaceAll("<player>", check.getName());
+
+                            config.set("unfreezemessageadmin", a);
+
+                            String mess = ChatColor.translateAlternateColorCodes('&', config.getString("unfreezemessage"));
+                            check.sendMessage(mess);
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("unfreezemessageadmin")));
+
+                    } else {
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("noplayer")));
                     }
-
-
-                    Join.player.remove(check);
-
-                    String a = config.getString("unfreezemessageadmin").replaceAll("<player>", check.getName());
-
-                    config.set("unfreezemessageadmin", a);
-
-                    String mess = ChatColor.translateAlternateColorCodes('&', config.getString("unfreezemessage"));
-                    check.sendMessage(mess);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("unfreezemessageadmin")));
-
                 } else {
-                    p.sendMessage("§7[§6§lAntimove§7] §cYou must give player name");
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("dontpermission")));
                 }
             } else {
                 if (args.length != 0) {
