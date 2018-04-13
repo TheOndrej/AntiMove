@@ -45,6 +45,15 @@ public class Join implements Listener{
                 config.createSection("unfreezemessageadmin");
                 config.set("unfreezemessageadmin", "&7[&6&lSystem&7] You are unfreezing player: player.");
 
+                config.createSection("dontpermission");
+                config.set("dontpermission", "&7[&6&lAntimove&7] &cYou don´t have permission!");
+
+                config.createSection("noplayer");
+                config.set("noplayer", "&7[&6&lAntimove&7] &cYou must give player name");
+
+                config.createSection("playernotonline");
+                config.set("playernotonline", "&7[&6&lAntimove&7] &cThis player is not online.");
+
                 config.createSection("time");
                 config.set("time", 3);
 
