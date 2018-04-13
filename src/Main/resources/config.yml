@@ -1,6 +1,9 @@
 joinmessage: '&7[&6&lSystem&7] You are joining? Wait three seconds, please.'
 freezemessage: '&7[&6&lSystem&7] You were freeze.'
 unfreezemessage: '&7[&6&lSystem&7] You were unfreeze.'
-freezemessageadmin: '&7[&6&lSystem&7] You are freezing player: <player>.'
-unfreezemessageadmin: '&7[&6&lSystem&7] You are unfreezing player: <player>.'
+freezemessageadmin: '&7[&6&lSystem&7] You are freezing player: player.'
+unfreezemessageadmin: '&7[&6&lSystem&7] You are unfreezing player: player.'
+dontpermission: '&7[&6&lAntimove&7] &cYou don´t have permission!'
+noplayer: '&7[&6&lAntimove&7] &cYou must give player name'
+playernotonline: '&7[&6&lAntimove&7] &cThis player is not online.'
 time: 3

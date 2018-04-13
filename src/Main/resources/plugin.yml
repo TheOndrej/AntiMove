@@ -8,3 +8,8 @@ commands:
   description: Freeze command
  unfreeze:
   description: Unfreeze command
+permissions:
+ antimove.freeze:
+  default: op
+ antimove.unfreeze:
+  default: op
